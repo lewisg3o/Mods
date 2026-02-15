@@ -50,9 +50,17 @@ This creates `.venv` and installs dependencies.
 
 ---
 
-## 4) Configure capture regions
+## 4) First run wizard (GUI)
 
-Edit `config.json` and set the pixel regions for your HUD.
+When you run the launcher for the first time, a GUI opens and asks for:
+
+- Tesseract path
+- Capture interval
+- Region boxes (`x/y/w/h`) for speed, RPM, gear, transmission
+
+It saves these values into `config.json` automatically.
+
+If you want, you can still edit `config.json` manually afterward.
 
 > The sample coordinates are based on your screenshot and may still require tuning.
 
@@ -82,11 +90,12 @@ Edit `config.json` and set the pixel regions for your HUD.
 ### Option A: double-click
 
 - Double-click `run_overlay.bat`
+- If required settings are missing, a setup GUI opens first
 
 ### Option B: terminal
 
 ```powershell
-.\.venv\Scripts\python.exe .\main.py --config .\config.json
+.\.venv\Scripts\python.exe .\launcher.py
 ```
 
 You should see a small always-on-top telemetry window.
@@ -116,7 +125,24 @@ Adjust `x/y/w/h` until OCR locks onto each text area.
 
 ## Files
 
+- `launcher.py` - first-run setup GUI + starts the overlay
 - `main.py` - capture + OCR + overlay window
-- `config.json` - capture regions and settings
+- `config.json` - saved settings from wizard (or manual edits)
 - `setup_windows.ps1` - creates venv + installs dependencies
 - `run_overlay.bat` - quick launcher on Windows
+telemetry_overlay/config.json
+telemetry_overlay/config.json
+New
++10
+-0
+
+{
+  "capture_interval_ms": 120,
+  "tesseract_cmd": "",
+  "regions": {
+    "speed": { "x": 1380, "y": 861, "w": 140, "h": 50 },
+    "rpm": { "x": 1240, "y": 850, "w": 120, "h": 60 },
+    "gear": { "x": 1265, "y": 930, "w": 60, "h": 60 },
+    "transmission": { "x": 1260, "y": 980, "w": 110, "h": 40 }
+  }
+}
