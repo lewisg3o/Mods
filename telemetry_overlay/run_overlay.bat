@@ -9,4 +9,4 @@ if not exist ".venv\Scripts\python.exe" (
   exit /b 1
 )
 
-.venv\Scripts\python.exe .\main.py --config .\config.json
+.venv\Scripts\python.exe .\launcher.py
